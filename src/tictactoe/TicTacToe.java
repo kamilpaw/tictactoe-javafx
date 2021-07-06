@@ -15,8 +15,8 @@ public class TicTacToe extends Application {
 
 
     private int turn;
-    private final Set<Integer> xset;
-    private final Set<Integer> oset;
+    private Set<Integer> xset;
+    private Set<Integer> oset;
     private Set<Integer> winindexes;
 
     public TicTacToe() {
@@ -72,10 +72,22 @@ public class TicTacToe extends Application {
             tp.getChildren().add(button);
         }
 
+        Button bt = new Button("RESTART");
+        bp.setBottom(bt);
+
+
         bp.setCenter(tp);
         Scene scene = new Scene(bp);
         stage.setScene(scene);
         stage.show();
+        bt.setOnMouseClicked((event -> {
+            stage.close();
+            this.xset = new HashSet<>();
+            this.oset = new HashSet<>();
+            this.winindexes = new HashSet<>();
+            turn = 0;
+            start(stage);
+        }));
     }
 
     public boolean win(Set<Integer> set) {
