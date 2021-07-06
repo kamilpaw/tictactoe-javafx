@@ -15,18 +15,14 @@ public class TicTacToe extends Application {
 
 
     private int turn;
-    private Set<Integer> xset;
-    private Set<Integer> oset;
+    private final Set<Integer> xset;
+    private final Set<Integer> oset;
     private Set<Integer> winindexes;
-    private boolean win;
 
     public TicTacToe() {
-        this.turn = turn;
         this.xset = new HashSet<>();
         this.oset = new HashSet<>();
         this.winindexes = new HashSet<>();
-        this.win = win;
-        win = false;
     }
 
     public void start(Stage stage) {
@@ -40,7 +36,7 @@ public class TicTacToe extends Application {
             button.setFont(new Font(60));
 
             button.setOnAction(event -> {
-                if (turn<9) {
+                if (turn < 9) {
                     if (button.getText().isEmpty()) {
                         if (isEven(turn)) {
                             button.setText("X");
@@ -82,8 +78,7 @@ public class TicTacToe extends Application {
         stage.show();
     }
 
-    public boolean win(Set set) {
-
+    public boolean win(Set<Integer> set) {
         int[] i1 = {0, 1, 2};
         HashSet<Integer> set1 = arrayToHashSet(i1);
         int[] i2 = {3, 4, 5};
@@ -100,22 +95,22 @@ public class TicTacToe extends Application {
         HashSet<Integer> set7 = arrayToHashSet(i7);
         int[] i8 = {0, 3, 6};
         HashSet<Integer> set8 = arrayToHashSet(i8);
-        if (isequalto(set, set1) || isequalto(set, set2) || isequalto(set, set3) || isequalto(set, set4) || isequalto(set, set5)|| isequalto(set, set6)|| isequalto(set, set7) || isequalto(set, set8)) {
+        if (isequalto(set, set1) || isequalto(set, set2) || isequalto(set, set3) || isequalto(set, set4) || isequalto(set, set5) || isequalto(set, set6) || isequalto(set, set7) || isequalto(set, set8)) {
             turn = 9;
             return true;
         }
         return false;
     }
+
     public boolean isequalto(Set<Integer> set1, Set<Integer> set2) {
         for (int i : set2) {
-            if (!set1.contains(i)){
+            if (!set1.contains(i)) {
                 return false;
             }
         }
         winindexes = set2;
         return true;
     }
-
 
     public HashSet<Integer> arrayToHashSet(int[] integers) {
         HashSet<Integer> set = new HashSet<>();
@@ -124,7 +119,6 @@ public class TicTacToe extends Application {
         }
         return set;
     }
-
 
     public boolean isEven(int i) {
         return i % 2 == 0;
