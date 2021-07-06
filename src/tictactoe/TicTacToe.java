@@ -13,21 +13,25 @@ import java.util.Set;
 
 public class TicTacToe extends Application {
 
-    int turn;
-    Set<Integer> xset = new HashSet<>();
-    Set<Integer> oset = new HashSet<>();
-    Set<Integer> winindexes = new HashSet<>();
 
-    public boolean win = false;
+    private int turn;
+    private Set<Integer> xset;
+    private Set<Integer> oset;
+    private Set<Integer> winindexes;
+    private boolean win;
 
+    public TicTacToe() {
+        this.turn = turn;
+        this.xset = new HashSet<>();
+        this.oset = new HashSet<>();
+        this.winindexes = new HashSet<>();
+        this.win = win;
+        win = false;
+    }
 
     public void start(Stage stage) {
         BorderPane bp = new BorderPane();
         bp.setPrefSize(600, 600);
-
-
-
-
 
         TilePane tp = new TilePane();
         for (int i = 0; i < 9; i++) {
@@ -35,14 +39,12 @@ public class TicTacToe extends Application {
             button.setPrefSize(200, 200);
             button.setFont(new Font(60));
 
-
             button.setOnAction(event -> {
                 if (turn<9) {
                     if (button.getText().isEmpty()) {
                         if (isEven(turn)) {
                             button.setText("X");
                             xset.add(tp.getChildren().indexOf(button));
-                            System.out.println(xset);
                             if (win(xset)) {
                                 for (int j : winindexes) {
                                     Button winButton = new Button();
@@ -51,27 +53,21 @@ public class TicTacToe extends Application {
                                     winButton.setText("X");
                                     tp.getChildren().remove(j);
                                     tp.getChildren().add(j, winButton);
-
                                 }
                             }
                         } else {
                             button.setText("O");
                             oset.add(tp.getChildren().indexOf(button));
-                            System.out.println(oset);
                             if (win(oset)) {
                                 for (int j : winindexes) {
                                     tp.getChildren().remove(j);
                                     Button winButton = new Button();
                                     winButton.setFont(new Font(60));
-                                    winButton.setStyle("-fx-background: lightgreen");
+                                    winButton.setStyle("-fx-base: lightgreen");
                                     winButton.setText("O");
                                     tp.getChildren().add(j, winButton);
-
-
                                 }
                             }
-
-
                         }
                         turn++;
                     }
@@ -79,7 +75,6 @@ public class TicTacToe extends Application {
             });
             tp.getChildren().add(button);
         }
-
 
         bp.setCenter(tp);
         Scene scene = new Scene(bp);
@@ -105,13 +100,13 @@ public class TicTacToe extends Application {
         HashSet<Integer> set7 = arrayToHashSet(i7);
         int[] i8 = {0, 3, 6};
         HashSet<Integer> set8 = arrayToHashSet(i8);
-        if (has(set, set1) || has(set, set2) || has(set, set3) || has(set, set4) || has(set, set5)|| has(set, set6)|| has(set, set7) || has(set, set8)) {
+        if (isequalto(set, set1) || isequalto(set, set2) || isequalto(set, set3) || isequalto(set, set4) || isequalto(set, set5)|| isequalto(set, set6)|| isequalto(set, set7) || isequalto(set, set8)) {
             turn = 9;
             return true;
         }
         return false;
     }
-    public boolean has (Set<Integer> set1, Set<Integer> set2) {
+    public boolean isequalto(Set<Integer> set1, Set<Integer> set2) {
         for (int i : set2) {
             if (!set1.contains(i)){
                 return false;
@@ -134,5 +129,4 @@ public class TicTacToe extends Application {
     public boolean isEven(int i) {
         return i % 2 == 0;
     }
-
 }
