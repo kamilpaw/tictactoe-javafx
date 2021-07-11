@@ -74,8 +74,6 @@ public class TicTacToe extends Application {
 
         Button bt = new Button("RESTART");
         bp.setBottom(bt);
-
-
         bp.setCenter(tp);
         Scene scene = new Scene(bp);
         stage.setScene(scene);
